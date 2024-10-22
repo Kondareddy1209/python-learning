@@ -46,8 +46,8 @@ The objective of this journey is to gain a solid understanding of Python, improv
 | 1.2 | Write our first Program in Python | 13min | ✅ Completed |
 | 1.3 | Python Data Types & Comments | 18min | ✅ Completed |
 | 1.4 | Variables, Keywords & Identifiers in Python | 22min | ✅ Completed  |
-| 1.5 | Python Input | 18min | ❌ Not Started |
-| 1.6 | Type Conversion in Python | 8min | ❌ Not Started |
+| 1.5 | Python Input | 18min | ✅ Completed |
+| 1.6 | Type Conversion in Python | 8min | ✅ Completed |
 | 1.7 | Literals in Python | 14min | ❌ Not Started |
 | 1.8 | Operators in Python | 24min | ❌ Not Started |
 | 1.9 | Operators Exercise | 11min | ❌ Not Started |
