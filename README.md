@@ -52,11 +52,11 @@ The objective of this journey is to gain a solid understanding of Python, improv
 | 1.8 | Operators in Python | 24min | ✅ Completed |
 | 1.9 | Operators Exercise | 11min | ✅ Completed |
 | **2. Conditional Statements** |  |  |  |
-| 2.1 | If Else Conditional Statements | 30min | ❌ Not Started |
-| 2.2 | Conditional Statements Exercise | 20min | ❌ Not Started |
+| 2.1 | If Else Conditional Statements | 30min | ✅ Completed |
+| 2.2 | Conditional Statements Exercise | 20min | ✅ Completed |
 | **3. pip & Modules** |  |  |  |
-| 3.1 | Modules in Python | 17min | ❌ Not Started |
-| 3.2 | Pip in Python | 9min | ❌ Not Started |
+| 3.1 | Modules in Python | 17min | ✅ Completed |
+| 3.2 | Pip in Python | 9min | ✅ Completed |
 | **4. Loops in Python** |  |  |  |
 | 4.1 | While Loop | 23min | ❌ Not Started |
 | 4.2 | Guessing Game using While Loop | 11min | ❌ Not Started |
