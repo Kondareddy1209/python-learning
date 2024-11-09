@@ -59,7 +59,7 @@ The objective of this journey is to gain a solid understanding of Python, improv
 | 3.2 | Pip in Python | 9min | ✅ Completed |
 | **4. Loops in Python** |  |  |  |
 | 4.1 | While Loop | 23min | ✅ Completed |
-| 4.2 | Guessing Game using While Loop | 11min | ❌ Not Started |
+| 4.2 | Guessing Game using While Loop | 11min | ✅ Completed |
 | 4.3 | For Loops | 11min | ❌ Not Started |
 | 4.4 | Nested For Loop | 18min | ❌ Not Started |
 | 4.5 | Loop Control Statements | 14min | ❌ Not Started |
