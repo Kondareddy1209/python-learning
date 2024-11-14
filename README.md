@@ -64,8 +64,8 @@ The objective of this journey is to gain a solid understanding of Python, improv
 | 4.4 | Nested For Loop | 18min | ✅ Completed |
 | 4.5 | Loop Control Statements | 14min | ✅ Completed |
 | **5. Strings in Python** |  |  |  |
-| 5.1 | Strings in Python | 28min | ❌ Not Started |
-| 5.2 | String Operations | 14min | ❌ Not Started |
+| 5.1 | Strings in Python | 28min | ✅ Completed |
+| 5.2 | String Operations | 14min | ✅ Completed |
 | 5.3 | String Methods | 31min | ❌ Not Started |
 | 5.4 | f-strings in Python | 4min | ❌ Not Started |
 | 5.5 | Strings Exercise | 18min | ❌ Not Started |
