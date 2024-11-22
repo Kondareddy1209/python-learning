@@ -68,7 +68,7 @@ The objective of this journey is to gain a solid understanding of Python, improv
 | 5.2 | String Operations | 14min | ✅ Completed |
 | 5.3 | String Methods | 31min | ✅ Completed |
 | 5.4 | f-strings in Python | 4min | ✅ Completed |
-| 5.5 | Strings Exercise | 18min | ❌ Not Started |
+| 5.5 | Strings Exercise | 18min | ✅ Completed |
 | **6. Data Structures** |  |  |  |
 | 6.1 | Lists in Python | 44min | ❌ Not Started |
 | 6.2 | Lists Methods | 18min | ❌ Not Started |
