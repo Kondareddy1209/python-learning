@@ -59,6 +59,7 @@ for i in range(len(List)):
     Sum += List[i]
 print(Sum)
 
+print(List)
 # Clear the list
 List.clear()
 print(List)  # []

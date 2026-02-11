@@ -18,7 +18,7 @@ s = 0
 ans = []
 
 # Generate all subarrays
-for i in range(len(n)):                # Start index
+for i in range(len(n)):                # Start index 
     for j in range(i, len(n)):         # End index
         temp = []
         for k in range(i, j + 1):      # Collect elements from i to j

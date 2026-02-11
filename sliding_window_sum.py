@@ -3,6 +3,7 @@
 # Input list
 n = [5, 9, 1, 8, 7]
 
+m=0
 # Variable to store the running sum
 temp = 0
 
@@ -23,3 +24,7 @@ for i in range(0, len(n)):
     # If window size becomes exactly 3, print the sum
     if (i - l + 1 == 3):
         print(temp)
+        m=max(m,temp)
+print("maximum",m)
+    
+

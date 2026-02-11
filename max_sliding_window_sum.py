@@ -16,7 +16,6 @@ ans = 0
 for i in range(0, len(n)):
     # Add the current element to running sum
     temp += n[i]
-    
     # If window size exceeds 3, remove the leftmost element
     if (i - l == 3):
         temp -= n[l]   # remove element going out of window
