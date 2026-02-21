@@ -33,6 +33,18 @@
 // c.push("Amazon")
 // console.log(c)
 
+// let n=[10,20,30,40,50,60]
+// n.splice(2)
+// console.log(n)
+
+// let n=[10,20,30,40,50,60]
+// n.splice(2,2,22,33)
+// console.log(n)
+
 let n=[10,20,30,40,50,60]
-n.splice(2)
+n.splice(2,2,22,33)
 console.log(n)
+n.splice(3,0,70)
+console.log(n)
+n.splice(3,1)
+console.log(n.length)
