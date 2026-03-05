@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:#d4d8e2;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;font-family:'Inter',sans-serif;
+}
+
+/* ── 16:9 slide — light/neutral bg, safe for white Google Slides ── */
+.slide{
+  width:960px;height:540px;
+  background:linear-gradient(160deg,#f7faff 0%,#eef4ff 55%,#f4f7ff 100%);
+  position:relative;overflow:hidden;border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,30,100,.18),0 4px 16px rgba(0,0,0,.10);
+  border:1.5px solid rgba(180,200,240,.6);
+}
+
+/* Subtle dot-grid texture */
+.slide::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(80,120,200,.10) 1px,transparent 1px);
+  background-size:22px 22px;pointer-events:none;
+}
+
+/* ── HEADER ── */
+.hdr{
+  position:absolute;top:0;left:0;right:0;height:50px;
+  background:rgba(255,255,255,.88);
+  border-bottom:2px solid rgba(30,80,200,.10);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;z-index:20;
+}
+.hdr-left{display:flex;flex-direction:column;gap:1px;}
+.hdr-title{
+  font-size:15px;font-weight:900;color:#0a0e24;letter-spacing:.2px;
+}
+.hdr-title em{font-style:normal;font-family:'JetBrains Mono',monospace;color:#1a5fff;font-size:12.5px;font-weight:700;}
+.hdr-sub{font-size:9px;color:#7080a0;letter-spacing:2.5px;text-transform:uppercase;}
+.hdr-badge{
+  background:linear-gradient(135deg,#1a5fff 0%,#8b00ff 100%);
+  color:#fff;font-size:9.5px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;padding:5px 14px;border-radius:20px;
+  box-shadow:0 3px 12px rgba(26,95,255,.35);
+}
+
+/* ── FOOTER ── */
+.ftr{
+  position:absolute;bottom:0;left:0;right:0;height:32px;
+  background:rgba(255,255,255,.88);
+  border-top:2px solid rgba(30,80,200,.10);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;z-index:20;
+}
+.ftr-dot{width:5px;height:5px;border-radius:50%;}
+.ftr-txt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#3a4060;letter-spacing:.8px;}
+.ftr-txt b{color:#1a5fff;}
+
+/* SVG fills entire slide */
+.svg-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;}
+
+/* ── LEVEL TEXT OVERLAYS ── */
+.lv{
+  position:absolute;z-index:10;
+  display:flex;align-items:center;
+  pointer-events:none;
+}
+.lv-info{display:flex;flex-direction:column;gap:1.5px;flex-shrink:0;}
+.lv-time{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  font-weight:700;letter-spacing:.5px;
+}
+.lv-title{font-size:15px;font-weight:900;color:#0a0e24;line-height:1.15;}
+.sep{width:1.5px;align-self:stretch;margin:0 9px;background:rgba(0,0,0,.1);flex-shrink:0;}
+.chips{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
+.row{display:flex;flex-wrap:wrap;gap:3.5px;}
+.chip{
+  font-size:11.5px;font-weight:600;color:#16204a;
+  background:rgba(255,255,255,.80);
+  border-radius:4px;padding:2.5px 7px;white-space:nowrap;
+  box-shadow:0 1px 4px rgba(0,0,0,.09);
+}
+.sep2{width:1.5px;align-self:stretch;margin:0 9px;background:rgba(0,0,0,.1);flex-shrink:0;}
+.goal-blk{display:flex;flex-direction:column;gap:1.5px;flex-shrink:0;text-align:right;}
+.goal-lbl{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;opacity:.65;}
+.goal-txt{font-size:12px;font-weight:800;color:#0a0e24;line-height:1.25;}
+
+/* Compact peak level (L5) */
+.lv-peak{
+  position:absolute;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;pointer-events:none;gap:2px;
+}
+.lv-peak .lv-time{font-size:8.5px;}
+.lv-peak .lv-title{font-size:12px;font-weight:900;color:#0a0e24;}
+.lv-peak .peak-chips{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;}
+.lv-peak .chip{font-size:8.5px;padding:2px 5px;}
+.lv-peak .goal-txt{font-size:9px;font-weight:800;}
+
+/* Level number badge on left slant */
+.lv-badge{
+  position:absolute;z-index:12;
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:900;
+  padding:2px 6px;border-radius:4px;color:#fff;pointer-events:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);letter-spacing:.5px;
+}
+
+/* Download button */
+.dl-btn{
+  position:fixed;top:18px;right:18px;
+  background:linear-gradient(135deg,#1a5fff,#8b00ff);
+  color:#fff;border:none;padding:10px 22px;
+  border-radius:8px;font-size:11.5px;font-weight:800;
+  cursor:pointer;box-shadow:0 4px 16px rgba(26,95,255,.4);
+  transition:all .3s;z-index:9999;
+}
+.dl-btn:hover{transform:translateY(-2px);box-shadow:0 7px 22px rgba(26,95,255,.55);}
+</style>
+</head>
+<body>
+
+<button class="dl-btn" onclick="dlPNG()">📥 Download PNG</button>
+
+<div class="slide" id="slide">
+
+<!-- ═══════════════════════ SVG BACKGROUND ═══════════════════════ -->
+<svg class="svg-bg" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+
+    <!-- ── Trapezoid gradient fills ── -->
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a5fff" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#1a5fff" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b00ff" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#8b00ff" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00b870" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#00b870" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff7a00" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#ff7a00" stop-opacity=".05"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8002a" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#e8002a" stop-opacity=".07"/>
+    </linearGradient>
+
+    <!-- ── Gradient arrows between levels ── -->
+    <linearGradient id="arr2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1a5fff"/>
+      <stop offset="100%" stop-color="#8b00ff"/>
+    </linearGradient>
+    <linearGradient id="arr3" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8b00ff"/>
+      <stop offset="100%" stop-color="#00b870"/>
+    </linearGradient>
+    <linearGradient id="arr4" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00b870"/>
+      <stop offset="100%" stop-color="#ff7a00"/>
+    </linearGradient>
+    <linearGradient id="arr5" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ff7a00"/>
+      <stop offset="100%" stop-color="#e8002a"/>
+    </linearGradient>
+
+    <!-- ── Drop shadows ── -->
+    <filter id="fs1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1a5fff" flood-opacity=".22"/>
+    </filter>
+    <filter id="fs2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8b00ff" flood-opacity=".22"/>
+    </filter>
+    <filter id="fs3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#00b870" flood-opacity=".22"/>
+    </filter>
+    <filter id="fs4" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#ff7a00" flood-opacity=".22"/>
+    </filter>
+    <filter id="fs5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#e8002a" flood-opacity=".25"/>
+    </filter>
+
+    <!-- ── Arrowhead markers ── -->
+    <marker id="ah2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <polygon points="0,8 4,0 8,8" fill="url(#arr2)" opacity=".9"/>
+    </marker>
+    <marker id="ah3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <polygon points="0,8 4,0 8,8" fill="url(#arr3)" opacity=".9"/>
+    </marker>
+    <marker id="ah4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <polygon points="0,8 4,0 8,8" fill="url(#arr4)" opacity=".9"/>
+    </marker>
+    <marker id="ah5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <polygon points="0,8 4,0 8,8" fill="url(#arr5)" opacity=".9"/>
+    </marker>
+
+  </defs>
+
+  <!--
+    ═══════════════ PYRAMID GEOMETRY ═══════════════
+    Header: 0–50px  |  Footer: 508–540px
+    Pyramid: y=56 to y=504  (448px total)
+    5 levels × 82px  +  4 gaps × 3px  =  410 + 12 = 422px  (centered with 13px top pad)
+
+    Layer Y ranges (gap = 3px between layers):
+      L5 (peak):  y=69  → y=151   (82px)
+      gap:        y=151 → y=154
+      L4:         y=154 → y=236
+      gap:        y=236 → y=239
+      L3:         y=239 → y=321
+      gap:        y=321 → y=324
+      L2:         y=324 → y=406
+      gap:        y=406 → y=409
+      L1 (base):  y=409 → y=491
+
+    X (left/right) per layer TOP and BOTTOM edges:
+      Narrows 65px per side per level step.
+      L1 bot: (65,895)  top: (130,830)
+      L2 bot: (130,830) top: (195,765)
+      L3 bot: (195,765) top: (260,700)
+      L4 bot: (260,700) top: (325,635)
+      L5 bot: (325,635) top: (390,570)
+
+    Center guide x: 480
+  -->
+
+  <!-- ─── Vertical center dashed guide ─── -->
+  <line x1="480" y1="54" x2="480" y2="498"
+    stroke="#1a5fff" stroke-width="1" stroke-opacity=".18"
+    stroke-dasharray="4 6"/>
+  <!-- glow dot at peak -->
+  <circle cx="480" cy="69" r="4" fill="#e8002a" opacity=".7"/>
+  <circle cx="480" cy="69" r="7" fill="none" stroke="#e8002a" stroke-width="1.5" opacity=".3"/>
+
+  <!-- ════════ LEVEL 1 – Blue – Setup & Architecture ════════ -->
+  <!-- L1: top(130,830)@y=409  bot(65,895)@y=491 -->
+  <polygon points="130,409 830,409 895,491 65,491"
+    fill="url(#g1)" filter="url(#fs1)"/>
+  <polyline points="130,409 830,409" stroke="#1a5fff" stroke-width="4" stroke-linecap="round"/>
+  <polyline points="65,491 895,491" stroke="#1a5fff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="65" y1="491" x2="130" y2="409" stroke="#1a5fff" stroke-width="4"/>
+  <line x1="895" y1="491" x2="830" y2="409" stroke="#1a5fff" stroke-width="4"/>
+  <!-- L1 number badge -->
+  <rect x="84" y="442" width="26" height="16" rx="4" fill="#1a5fff"/>
+  <text x="97" y="454" text-anchor="middle" font-family="JetBrains Mono,monospace"
+    font-size="9" font-weight="700" fill="white">L1</text>
+
+  <!-- ════════ LEVEL 2 – Purple – AI Core ════════ -->
+  <!-- L2: top(195,765)@y=324  bot(130,830)@y=406 -->
+  <polygon points="195,324 765,324 830,406 130,406"
+    fill="url(#g2)" filter="url(#fs2)"/>
+  <polyline points="195,324 765,324" stroke="#8b00ff" stroke-width="4" stroke-linecap="round"/>
+  <polyline points="130,406 830,406" stroke="#8b00ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="130" y1="406" x2="195" y2="324" stroke="#8b00ff" stroke-width="4"/>
+  <line x1="830" y1="406" x2="765" y2="324" stroke="#8b00ff" stroke-width="4"/>
+  <rect x="150" y="357" width="26" height="16" rx="4" fill="#8b00ff"/>
+  <text x="163" y="369" text-anchor="middle" font-family="JetBrains Mono,monospace"
+    font-size="9" font-weight="700" fill="white">L2</text>
+
+  <!-- ════════ LEVEL 3 – Green – Frontend Integration ════════ -->
+  <!-- L3: top(260,700)@y=239  bot(195,765)@y=321 -->
+  <polygon points="260,239 700,239 765,321 195,321"
+    fill="url(#g3)" filter="url(#fs3)"/>
+  <polyline points="260,239 700,239" stroke="#00b870" stroke-width="4" stroke-linecap="round"/>
+  <polyline points="195,321 765,321" stroke="#00b870" stroke-width="4" stroke-linecap="round"/>
+  <line x1="195" y1="321" x2="260" y2="239" stroke="#00b870" stroke-width="4"/>
+  <line x1="765" y1="321" x2="700" y2="239" stroke="#00b870" stroke-width="4"/>
+  <rect x="215" y="272" width="26" height="16" rx="4" fill="#00b870"/>
+  <text x="228" y="284" text-anchor="middle" font-family="JetBrains Mono,monospace"
+    font-size="9" font-weight="700" fill="white">L3</text>
+
+  <!-- ════════ LEVEL 4 – Orange – Marketplace Simulation ════════ -->
+  <!-- L4: top(325,635)@y=154  bot(260,700)@y=236 -->
+  <polygon points="325,154 635,154 700,236 260,236"
+    fill="url(#g4)" filter="url(#fs4)"/>
+  <polyline points="325,154 635,154" stroke="#ff7a00" stroke-width="4.5" stroke-linecap="round"/>
+  <polyline points="260,236 700,236" stroke="#ff7a00" stroke-width="4.5" stroke-linecap="round"/>
+  <line x1="260" y1="236" x2="325" y2="154" stroke="#ff7a00" stroke-width="4.5"/>
+  <line x1="700" y1="236" x2="635" y2="154" stroke="#ff7a00" stroke-width="4.5"/>
+  <rect x="280" y="187" width="26" height="16" rx="4" fill="#ff7a00"/>
+  <text x="293" y="199" text-anchor="middle" font-family="JetBrains Mono,monospace"
+    font-size="9" font-weight="700" fill="white">L4</text>
+
+  <!-- ════════ LEVEL 5 – Red – Polish & Demo (PEAK) ════════ -->
+  <!-- L5: top(390,570)@y=69  bot(325,635)@y=151 -->
+  <polygon points="390,69 570,69 635,151 325,151"
+    fill="url(#g5)" filter="url(#fs5)"/>
+  <polyline points="390,69 570,69" stroke="#e8002a" stroke-width="4" stroke-linecap="round"/>
+  <polyline points="325,151 635,151" stroke="#e8002a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="325" y1="151" x2="390" y2="69" stroke="#e8002a" stroke-width="4"/>
+  <line x1="635" y1="151" x2="570" y2="69" stroke="#e8002a" stroke-width="4"/>
+  <rect x="345" y="102" width="26" height="16" rx="4" fill="#e8002a"/>
+  <text x="358" y="114" text-anchor="middle" font-family="JetBrains Mono,monospace"
+    font-size="9" font-weight="700" fill="white">L5</text>
+
+  <!-- ═══ GRADIENT UPWARD ARROWS ═══ -->
+  <!-- Arrow between L1 → L2: gap y=406–409, center x=480 -->
+  <line x1="480" y1="408" x2="480" y2="401"
+    stroke="url(#arr2)" stroke-width="2.5"
+    marker-end="url(#ah2)" stroke-linecap="round" opacity=".9"/>
+
+  <!-- Arrow L2 → L3: gap y=321–324 -->
+  <line x1="480" y1="323" x2="480" y2="316"
+    stroke="url(#arr3)" stroke-width="2.5"
+    marker-end="url(#ah3)" stroke-linecap="round" opacity=".9"/>
+
+  <!-- Arrow L3 → L4: gap y=236–239 -->
+  <line x1="480" y1="238" x2="480" y2="231"
+    stroke="url(#arr4)" stroke-width="2.5"
+    marker-end="url(#ah4)" stroke-linecap="round" opacity=".9"/>
+
+  <!-- Arrow L4 → L5: gap y=151–154 -->
+  <line x1="480" y1="153" x2="480" y2="146"
+    stroke="url(#arr5)" stroke-width="2.5"
+    marker-end="url(#ah5)" stroke-linecap="round" opacity=".9"/>
+
+  <!-- Gradient footer accent line -->
+  <defs>
+    <linearGradient id="ftrLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a5fff" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#1a5fff" stop-opacity=".7"/>
+      <stop offset="50%" stop-color="#8b00ff" stop-opacity=".7"/>
+      <stop offset="75%" stop-color="#e8002a" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#e8002a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <line x1="0" y1="510" x2="960" y2="510" stroke="url(#ftrLine)" stroke-width="2"/>
+
+</svg>
+<!-- ══════════════════════════════════════════════════════════ -->
+
+
+<!-- ══ HEADER ══ -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-title">🚀 IMPLEMENTATION PLAN &nbsp;<em>// 24-Hour Hackathon Build</em></div>
+    <div class="hdr-sub">Pyramid Architecture  ·  Phase-by-Phase Execution Roadmap</div>
+  </div>
+  <div class="hdr-badge">⏱ 24 Hrs · 5 Levels</div>
+</div>
+
+
+<!-- ══════════════ LEVEL TEXT OVERLAYS ══════════════ -->
+
+<!--
+  L1: y=409–491 → midY=450  safe x: 160–860  width≈700px
+  Layout: [info|sep|chips|sep2|goal]
+-->
+<div class="lv" style="top:409px;left:158px;height:82px;width:688px;">
+  <div class="lv-info" style="width:136px;">
+    <div class="lv-time" style="color:#1a5fff;">⏱ 0 – 3 Hours</div>
+    <div class="lv-title">Setup &amp;<br>Architecture</div>
+  </div>
+  <div class="sep"></div>
+  <div class="chips">
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #1a5fff;">🗂 Finalize system design</span>
+      <span class="chip" style="border-left:3px solid #1a5fff;">🐙 GitHub repo setup</span>
+      <span class="chip" style="border-left:3px solid #1a5fff;">⚙ FastAPI backend init</span>
+    </div>
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #1a5fff;">📱 Initialize Flutter app</span>
+      <span class="chip" style="border-left:3px solid #1a5fff;">🍃 Connect MongoDB</span>
+    </div>
+  </div>
+  <div class="sep2"></div>
+  <div class="goal-blk" style="width:155px;">
+    <div class="goal-lbl" style="color:#1a5fff;">🎯 Goal</div>
+    <div class="goal-txt" style="color:#0a2a80;">Backend &amp; frontend<br>skeleton ready</div>
+  </div>
+</div>
+
+<!--
+  L2: y=324–406 → midY=365  safe x: 215–745  width≈530px
+-->
+<div class="lv" style="top:324px;left:218px;height:82px;width:524px;">
+  <div class="lv-info" style="width:128px;">
+    <div class="lv-time" style="color:#8b00ff;">⏱ 3 – 10 Hours</div>
+    <div class="lv-title">AI Core<br>Development</div>
+  </div>
+  <div class="sep"></div>
+  <div class="chips">
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #8b00ff;">🎙 Speech-to-Text (Vosk / Google STT)</span>
+    </div>
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #8b00ff;">🤖 Connect LLM</span>
+      <span class="chip" style="border-left:3px solid #8b00ff;">🔌 Voice → JSON endpoint</span>
+    </div>
+  </div>
+  <div class="sep2"></div>
+  <div class="goal-blk" style="width:128px;">
+    <div class="goal-lbl" style="color:#8b00ff;">🎯 Goal</div>
+    <div class="goal-txt" style="color:#40007a;">Structured output<br>working</div>
+  </div>
+</div>
+
+<!--
+  L3: y=239–321 → midY=280  safe x: 282–678  width≈396px
+-->
+<div class="lv" style="top:239px;left:284px;height:82px;width:392px;">
+  <div class="lv-info" style="width:116px;">
+    <div class="lv-time" style="color:#00965a;">⏱ 10 – 16 Hrs</div>
+    <div class="lv-title">Frontend<br>Integration</div>
+  </div>
+  <div class="sep"></div>
+  <div class="chips">
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #00b870;">🔗 Connect Flutter UI</span>
+      <span class="chip" style="border-left:3px solid #00b870;">👁 Preview data</span>
+    </div>
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #00b870;">✏ Edit &amp; confirm</span>
+      <span class="chip" style="border-left:3px solid #00b870;">💾 Store to DB</span>
+    </div>
+  </div>
+  <div class="sep2"></div>
+  <div class="goal-blk" style="width:108px;">
+    <div class="goal-lbl" style="color:#00965a;">🎯 Goal</div>
+    <div class="goal-txt" style="color:#004d2e;font-size:11px;">End-to-end<br>flow working</div>
+  </div>
+</div>
+
+<!--
+  L4: y=154–236 → midY=195  trapezoid midY safe zone: x=293–668 (375px)
+  Overlay anchored at top edge x=330 to x=630 (300px), centered in 82px height
+  Consistent 3-col: [info | sep | chips | sep | goal]
+-->
+<div class="lv" style="top:154px;left:330px;height:82px;width:300px;">
+  <div class="lv-info" style="width:96px;flex-shrink:0;">
+    <div class="lv-time" style="color:#cc6200;">⏱ 16–20 Hrs</div>
+    <div class="lv-title" style="font-size:13.5px;">Marketplace<br>Simulation</div>
+  </div>
+  <div class="sep"></div>
+  <div class="chips">
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #ff7a00;font-size:10.5px;">📡 ONDC API sim</span>
+    </div>
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #ff7a00;font-size:10.5px;">💬 WhatsApp demo</span>
+    </div>
+    <div class="row">
+      <span class="chip" style="border-left:3px solid #ff7a00;font-size:10.5px;">🔄 Mock sync</span>
+    </div>
+  </div>
+  <div class="sep2"></div>
+  <div class="goal-blk" style="width:84px;flex-shrink:0;">
+    <div class="goal-lbl" style="color:#cc6200;">🎯 Goal</div>
+    <div class="goal-txt" style="color:#7a3000;font-size:11.5px;">Market-<br>place ready</div>
+  </div>
+</div>
+
+<!--
+  L5: y=69–151 → midY=110  available x=355–600 (≈245px safe)
+  Peak layout: centered column
+-->
+<div class="lv-peak" style="top:69px;left:338px;width:284px;height:82px;">
+  <div class="lv-time" style="color:#c40020;">⏱ 20 – 24 Hours</div>
+  <div class="lv-title" style="font-size:12.5px;">✨ Polish &amp; Demo Prep</div>
+  <div class="peak-chips">
+    <span class="chip" style="border-left:3px solid #e8002a;">🎨 UI polish</span>
+    <span class="chip" style="border-left:3px solid #e8002a;">🐛 Bug fixes</span>
+    <span class="chip" style="border-left:3px solid #e8002a;">📊 Pitch ready</span>
+  </div>
+  <div class="goal-txt" style="color:#8a001a;font-size:9.5px;">🎯 Stable live demo</div>
+</div>
+
+
+<!-- ══ FOOTER ══ -->
+<div class="ftr">
+  <div class="ftr-dot" style="background:#1a5fff;"></div>
+  <span class="ftr-txt"><b>24 Hours</b> &nbsp;·&nbsp; <b>5 Levels</b> &nbsp;·&nbsp; Hackathon Execution Plan</span>
+  <div class="ftr-dot" style="background:#8b00ff;"></div>
+  <span class="ftr-txt" style="color:#6070a0;">Setup → AI Core → Frontend UI → Marketplace → Demo Polish</span>
+  <div class="ftr-dot" style="background:#e8002a;"></div>
+</div>
+
+</div><!-- /slide -->
+
+<script>
+function dlPNG(){
+  const slide = document.getElementById('slide');
+  const btn   = document.querySelector('.dl-btn');
+  btn.style.display = 'none';
+  html2canvas(slide,{
+    backgroundColor: null,
+    scale: 2,
+    logging: false,
+    useCORS: true
+  }).then(c=>{
+    c.toBlob(blob=>{
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Hackathon-PyramidPlan.png';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      btn.style.display = 'block';
+    });
+  });
+}
+</script>
+</body>
+</html>
