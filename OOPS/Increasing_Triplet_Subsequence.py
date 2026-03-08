@@ -13,5 +13,6 @@ for k in range(len(nums)):
         j=nums[k]
     else:
         print(True)
+        
 else:
     print(False)
