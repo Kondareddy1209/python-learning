@@ -1,275 +1,135 @@
-# Python Learning Journey
+# Python & JavaScript Learning Journey
 
 ## Overview
 
-This repository serves as a comprehensive guide to my learning journey in Python programming. It covers various topics from the basics of Python to advanced concepts, including object-oriented programming (OOP), file handling, exception handling, and more. Each section is carefully organized to build upon the previous one, ensuring a structured and progressive learning path. The repository will include code examples, exercises, and projects that demonstrate the practical application of Python in real-world scenarios.
+This repository is a hands-on collection of Python and JavaScript practice files covering core programming concepts, object-oriented programming, array/list algorithms, DOM manipulation, and LeetCode problem solutions. It tracks learning progress from fundamentals through to advanced OOP patterns and coding challenges.
 
-The objective of this journey is to gain a solid understanding of Python, improve problem-solving skills, and develop the ability to create functional applications using Python.
+---
 
-### Course Details:
-- **Course Title:** Master Python: From First Steps to Pro-Level Programming
-  ```bash
-  https://www.udemy.com/course/python-beginners-to-advance-bootcamp/
-  ```
-- **Platform:** Udemy
+## Repository Structure
+
+```
+python-learning/
+├── Python Scripts (root)       # Core Python exercises & algorithms
+├── JavaScript Scripts (root)   # JS fundamentals & DOM exercises
+├── Web Files (root)            # HTML & CSS files
+├── OOPS/                       # OOP inheritance deep-dive
+└── Leetcode/                   # LeetCode problem solutions
+```
 
 ---
 
 ## Table of Contents
 
-1. [Introduction & Basics of Python](#section-1)
-2. [Conditional Statements](#section-2)
-3. [pip & Modules](#section-3)
-4. [Loops in Python](#section-4)
-5. [Strings in Python](#section-5)
-6. [Data Structures](#section-6)
-7. [Functions in Python](#section-7)
-8. [Virtual Environment & Requirements](#section-8)
-9. [File Handling in Python](#section-9)
-10. [Exception Handling](#section-10)
-11. [Logging in Python](#section-11)
-12. [Mega Projects](#section-12)
-13. [Regular Expressions](#section-13)
-14. [Solving Day-to-Day Problems](#section-14)
-15. [OOP in Python](#section-15)
-16. [Advanced OOP in Python](#section-16)
-17. [Projects & Final Exercises](#section-17)
+1. [Python — Core Exercises](#1-python--core-exercises)
+2. [Python — Array & List Algorithms](#2-python--array--list-algorithms)
+3. [Python — OOP (OOPS folder)](#3-python--oop-oops-folder)
+4. [JavaScript — Fundamentals](#4-javascript--fundamentals)
+5. [Web — HTML & CSS](#5-web--html--css)
+6. [LeetCode Solutions](#6-leetcode-solutions)
 
 ---
 
-## Progress
+## 1. Python — Core Exercises
 
-| Section | Topic | Duration | Status |
-| --- | --- | --- | --- |
-| **1. Introduction & Basics of Python** |  |  |  |
-| 1.1 | Introduction to Python & Setup | 16min | ✅ Completed |
-| 1.2 | Write our first Program in Python | 13min | ✅ Completed |
-| 1.3 | Python Data Types & Comments | 18min | ✅ Completed |
-| 1.4 | Variables, Keywords & Identifiers in Python | 22min | ✅ Completed  |
-| 1.5 | Python Input | 18min | ✅ Completed |
-| 1.6 | Type Conversion in Python | 8min | ✅ Completed |
-| 1.7 | Literals in Python | 14min | ✅ Completed |
-| 1.8 | Operators in Python | 24min | ✅ Completed |
-| 1.9 | Operators Exercise | 11min | ✅ Completed |
-| **2. Conditional Statements** |  |  |  |
-| 2.1 | If Else Conditional Statements | 30min | ✅ Completed |
-| 2.2 | Conditional Statements Exercise | 20min | ✅ Completed |
-| **3. pip & Modules** |  |  |  |
-| 3.1 | Modules in Python | 17min | ✅ Completed |
-| 3.2 | Pip in Python | 9min | ✅ Completed |
-| **4. Loops in Python** |  |  |  |
-| 4.1 | While Loop | 23min | ✅ Completed |
-| 4.2 | Guessing Game using While Loop | 11min | ✅ Completed |
-| 4.3 | For Loops | 11min | ✅ Completed |
-| 4.4 | Nested For Loop | 18min | ✅ Completed |
-| 4.5 | Loop Control Statements | 14min | ✅ Completed |
-| **5. Strings in Python** |  |  |  |
-| 5.1 | Strings in Python | 28min | ✅ Completed |
-| 5.2 | String Operations | 14min | ✅ Completed |
-| 5.3 | String Methods | 31min | ✅ Completed |
-| 5.4 | f-strings in Python | 4min | ✅ Completed |
-| 5.5 | Strings Exercise | 18min | ✅ Completed |
-| **6. Data Structures** |  |  |  |
-| 6.1 | Lists in Python | 44min | ❌ Not Started |
-| 6.2 | Lists Methods | 18min | ❌ Not Started |
-| 6.3 | Lists Operations | 4min | ❌ Not Started |
-| 6.4 | List Comprehension | 13min | ❌ Not Started |
-| 6.5 | Zip Function | 9min | ❌ Not Started |
-| 6.6 | Lists Exercise | 18min | ❌ Not Started |
-| 6.7 | Tuples in Python | 15min | ❌ Not Started |
-| 6.8 | Tuples Operations | 3min | ❌ Not Started |
-| 6.9 | Tuples Methods | 4min | ❌ Not Started |
-| 6.10 | Difference between Lists and Tuples | 5min | ❌ Not Started |
-| 6.11 | Tuples Unpacking | 4min | ❌ Not Started |
-| 6.12 | Tuples Comprehension | 4min | ❌ Not Started |
-| 6.13 | Sets in Python | 19min | ❌ Not Started |
-| 6.14 | Sets Operations | 6min | ❌ Not Started |
-| 6.15 | Sets Methods | 8min | ❌ Not Started |
-| 6.16 | Frozenset in Python | 5min | ❌ Not Started |
-| 6.17 | Sets Comprehension | 3min | ❌ Not Started |
-| 6.18 | Dictionary in Python | 23min | ❌ Not Started |
-| 6.19 | Dictionary Operations | 3min | ❌ Not Started |
-| 6.20 | Dictionary Methods | 4min | ❌ Not Started |
-| 6.21 | Dictionary Comprehension | 7min | ❌ Not Started |
-| 6.22 | Restaurant Management System | 12min | ❌ Not Started |
-| **7. Functions in Python** |  |  |  |
-| 7.1 | Functions in Python | 20min | ❌ Not Started |
-| 7.2 | Docstrings in Functions | 7min | ❌ Not Started |
-| 7.3 | Parameters vs Arguments | 7min | ❌ Not Started |
-| 7.4 | *args and **kwargs | 12min | ❌ Not Started |
-| 7.5 | Function Memory Execution | 4min | ❌ Not Started |
-| 7.6 | Functions without Return Statement | 4min | ❌ Not Started |
-| 7.7 | Variable Scope in Functions | 11min | ❌ Not Started |
-| 7.8 | Nested Functions | 7min | ❌ Not Started |
-| 7.9 | Functions as First-Class Citizens | 10min | ❌ Not Started |
-| 7.10 | Benefits of Using Functions | 3min | ❌ Not Started |
-| 7.11 | Lambda Function | 14min | ❌ Not Started |
-| 7.12 | Higher Order Functions (map, filter, reduce) | 13min | ❌ Not Started |
-| 7.13 | Enumerate Function | 4min | ❌ Not Started |
-| **8. Virtual Environment & Requirements** |  |  |  |
-| 8.1 | Virtual Environment in Python | 12min | ❌ Not Started |
-| 8.2 | requirements.txt in Python | 10min | ❌ Not Started |
-| **9. File Handling in Python** |  |  |  |
-| 9.1 | File Handling | 19min | ❌ Not Started |
-| 9.2 | File Handling using Context Manager | 23min | ❌ Not Started |
-| 9.3 | Problems with Text Mode | 8min | ❌ Not Started |
-| 9.4 | Serialization & Deserialization | 10min | ❌ Not Started |
-| 9.5 | Pickling in Python | 5min | ❌ Not Started |
-| **10. Exception Handling** |  |  |  |
-| 10.1 | Exception Handling in Python | 21min | ❌ Not Started |
-| 10.2 | Types of Exception Handling | 9min | ❌ Not Started |
-| 10.3 | Try Except Else | 3min | ❌ Not Started |
-| 10.4 | Try Except Else Finally | 3min | ❌ Not Started |
-| 10.5 | Raise Exception | 3min | ❌ Not Started |
-| **11. Logging in Python** |  |  |  |
-| 11.1 | Logging in Python | N/A | ❌ Not Started |
-| **12. Mega Projects** |  |  |  |
-| 12.1 | Building an Iron Man JARVIS System | 1hr | ❌ Not Started |
-| 12.2 | Building a Multilingual AI Assistant | 31min | ❌ Not Started |
-| **13. Regular Expressions** |  |  |  |
-| 13.1 | Introduction to Regular Expressions | 23min | ❌ Not Started |
-| **14. Solving Day-to-Day Problems** |  |  |  |
-| 14.1 | Automated Email Sender in Python | 24min | ❌ Not Started |
-| **15. OOP in Python** |  |  |  |
-| 15.1 | Introduction to Object-Oriented Programming | 17min | ❌ Not Started |
-| 15.2 | OOP Classes and Objects | 15min | ❌ Not Started |
-| 15.3 | Constructor and Destructor | 8min | ❌ Not Started |
-| 15.4 | Inheritance | 19min | ❌ Not Started |
-| 15.5 | Encapsulation | 10min | ❌ Not Started |
-| 15.6 | Polymorphism | 11min | ❌ Not Started |
-| 15.7 | Abstraction | 5min | ❌ Not Started |
-| **16. Advanced OOP in Python** |  |  |  |
-| 16.1 | Multiple Inheritance | 6min | ❌ Not Started |
-| 16.2 | Method Resolution Order (MRO) | 4min | ❌ Not Started |
-| 16.3 | Operator Overloading | 8min | ❌ Not Started |
-| 16.4 | Class Methods vs Static Methods | 6min | ❌ Not Started |
-| **17. Projects & Final Exercises** |  |  |  |
-| 17.1 | Project: Website Scraper | 30min | ❌ Not Started |
-| 17.2 | Project: Create an API with Flask | 1hr | ❌ Not Started |
-| 17.3 | Final Review and Bonus Content | 25min | ❌ Not Started |
-|**18 .Mega OOP Project**|   |   |   |
-| 18.1 | Conclusion and Future Advice | 34min | ❌ Not Started |
+| File | Description |
+|------|-------------|
+| [common_elements.py](common_elements.py) | Find common elements between two lists |
+| [dunder.py](dunder.py) | Dunder (magic) methods in Python |
+| [employee.py](employee.py) | Employee class — OOP basics (class, attributes, methods) |
+| [finding_element_index.py](finding_element_index.py) | Find the index of an element in a list |
+| [guess_game.py](guess_game.py) | Number guessing game using a while loop |
+| [list_operations_demo.py](list_operations_demo.py) | Demo of common list operations |
+| [merge_two_list.py](merge_two_list.py) | Merge two lists into one |
+| [missing_number.py](missing_number.py) | Find the missing number in a sequence |
+| [remove_duplicates.py](remove_duplicates.py) | Remove duplicate values from a list |
+| [second_largest_element.py](second_largest_element.py) | Find the second largest element in a list |
+| [sort Array.py](sort%20Array.py) | Sort an array |
+| [sum_of_elements.py](sum_of_elements.py) | Calculate the sum of list elements |
+| [swap_without_temp.py](swap_without_temp.py) | Swap two variables without a temporary variable |
+| [without_moduler.py](without_moduler.py) | Check odd/even without the modulo operator |
+| [Move All Zeros to the End.py](Move%20All%20Zeros%20to%20the%20End.py) | Move all zeros to the end of an array |
+
 ---
 
-Feel free to add or modify more details, or sections, based on your learning progress.
+## 2. Python — Array & List Algorithms
 
-## Structure  
+| File | Description |
+|------|-------------|
+| [sliding_window_sum.py](sliding_window_sum.py) | Sliding window sum of a fixed-size window |
+| [max_sliding_window_sum.py](max_sliding_window_sum.py) | Maximum sum using the sliding window technique |
+| [max_subarray_sum_length4.py](max_subarray_sum_length4.py) | Maximum subarray sum of length 4 |
 
-The repository is organized by topics, with each topic containing directories for my personal solutions. Each directory includes:  
+---
 
-- **Solution:** My code implementation of the problem.
-  
-- **Additional Notes:** Any insights or comments I found useful while solving the problem.
-  
-### Example Structure
-```
+## 3. Python — OOP (`OOPS/` folder)
 
+| File | Description |
+|------|-------------|
+| [single_inheritence.py](OOPS/single_inheritence.py) | Single inheritance example |
+| [python_multi_level_inheritance.py](OOPS/python_multi_level_inheritance.py) | Multi-level inheritance |
+| [practice_multilevel_inheritence.py](OOPS/practice_multilevel_inheritence.py) | Practice: multi-level inheritance |
+| [multiple_inheritence_example.py](OOPS/multiple_inheritence_example.py) | Multiple inheritance basics |
+| [multiple_inheritence_example1.py](OOPS/multiple_inheritence_example1.py) | Multiple inheritance — example 2 |
+| [practice_multiple_inheritence.py](OOPS/practice_multiple_inheritence.py) | Practice: multiple inheritance |
+| [python_multiple_inheritance_demo.py](OOPS/python_multiple_inheritance_demo.py) | Full demo of multiple inheritance |
+| [multiple_and_multilevel_inheritance.py](OOPS/multiple_and_multilevel_inheritance.py) | Combined multiple & multilevel inheritance |
+| [hierarchical_inheritence.py](OOPS/hierarchical_inheritence.py) | Hierarchical inheritance |
+| [hybrid_inheritence.py](OOPS/hybrid_inheritence.py) | Hybrid inheritance |
+| [hybrid_inheritence_example1.py](OOPS/hybrid_inheritence_example1.py) | Hybrid inheritance — example with diagram comments |
+| [method_overriding_function.py](OOPS/method_overriding_function.py) | Method overriding |
+| [super_function_example.py](OOPS/super_function_example.py) | Using `super()` in inheritance |
+| [is_sub_class_function.py](OOPS/is_sub_class_function.py) | `issubclass()` and `isinstance()` built-in functions |
+| [Product_of_array.py](OOPS/Product_of_array.py) | Product of array elements (algorithm practice) |
+| [Increasing_Triplet_Subsequence.py](OOPS/Increasing_Triplet_Subsequence.py) | Increasing triplet subsequence (algorithm practice) |
 
-├── Day 1
-│   ├── Lec 1: Introduction to Python & Setup
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 2: Write Our First Program in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 3: Python Data Types & Comments
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 4: Variables, Keywords & Identifiers in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 5: Python Input
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-├── Day 2
-│   ├── Lec 6: Type Conversion in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 7: Operators in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 8: Conditional Statements (if, else, elif)
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 9: Loops (while, for)
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 10: Strings in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-├── Day 3
-│   ├── Lec 11: Lists in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 12: Tuples in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 13: Sets in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 14: Dictionaries in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 15: Functions in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-├── Day 4
-│   ├── Lec 16: Exception Handling in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 17: Logging in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 18: Object-Oriented Programming (OOP) in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 19: Class Inheritance in OOP
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-├── Day 5
-│   ├── Lec 20: Advanced OOP Concepts in Python
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
-│   ├── Lec 21: Final Project (Building a Python-Based JARVIS System)
-│   │   ├── Problem1.py
-│   │   ├── Problem2.py
-│   │   └── ...
+---
 
-```
+## 4. JavaScript — Fundamentals
 
+| File | Description |
+|------|-------------|
+| [first.js](first.js) | First JavaScript program |
+| [functions.js](functions.js) | Function declarations and expressions |
+| [function_call.js](function_call.js) | Calling functions |
+| [function_test.js](function_test.js) | Function testing examples |
+| [multiple_return.js](multiple_return.js) | Functions with multiple return values |
+| [wrong_function.js](wrong_function.js) | Common function mistakes and fixes |
+| [arrays.js](arrays.js) | Array basics |
+| [array_length.js](array_length.js) | Array length property |
+| [append.js](append.js) | Appending elements to arrays/DOM |
+| [loop.js](loop.js) | Loop basics |
+| [while.js](while.js) | While loop examples |
+| [else_with_while.js](else_with_while.js) | Using else with while loops |
+| [for_in.js](for_in.js) | `for...in` loop |
+| [odd_or_even.js](odd_or_even.js) | Odd or even check |
+| [Access_object_value.js](Access_object_value.js) | Accessing object properties |
+| [Dom.js](Dom.js) | DOM manipulation |
+| [script.js](script.js) | General script examples |
+| [test.js](test.js) | Test / scratch file |
+| [prompt_version.js](prompt_version.js) | Using `prompt()` for user input |
+| [prompt_without_paras.js](prompt_without_paras.js) | `prompt()` without parameters |
+| [using_prompt_inside_function.js](using_prompt_inside_function.js) | `prompt()` inside a function |
+| [undeclared_version.js](undeclared_version.js) | Undeclared variables and `var`/`let`/`const` scoping |
 
-## Contributing
+---
 
-Although this repository is primarily for tracking my own progress, I welcome any suggestions, improvements, or discussions. Feel free to open an issue or submit a pull request if you find something that can be improved.
+## 5. Web — HTML & CSS
 
-## License
+| File | Description |
+|------|-------------|
+| [index.html](index.html) | Main HTML page |
+| [new.html](new.html) | Additional HTML page |
+| [style.css](style.css) | Stylesheet |
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
 
-## Acknowledgements
+## 6. LeetCode Solutions
 
-- [Striver](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/): For creating the A-Z DSA sheet and providing a structured path for DSA practice.
-- The open-source community for continuous learning and collaboration.
+| File | Problem | Topic |
+|------|---------|-------|
+| [Leetcode/Leetcode_283.py](Leetcode/Leetcode_283.py) | #283 — Move Zeroes | Array, Two Pointers |
+| [Leetcode/leetcode_605.py](Leetcode/leetcode_605.py) | #605 — Can Place Flowers | Array, Greedy |
 
 
 
